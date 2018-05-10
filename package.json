@@ -1,0 +1,30 @@
+{
+  "name": "zones",
+  "version": "0.1.0",
+    "description": "list zones in Google Cloud that are up, meet various requirements, and are in regions with available project quota",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha --reporter spec --timeout 30000"
+  },
+    "repository": {
+	"type": "git",
+	"url": "git+https://github.com/drpaulbrewer/zones-for-google-cloud"
+    },
+    "keywords":[
+	"google-compute-engine",
+	"zone",
+	"quotas",
+	"infrastructure"
+    ],
+  "author": "drpaulbrewer@eaftc.com",
+  "license": "MIT",
+  "dependencies": {
+    "array-uniq": "^2.0.0",
+    "rain-from-google-cloud": "^0.2.0"
+  },
+  "devDependencies": {
+    "@google-cloud/compute": "^0.10.0",
+    "mocha": "^5.1.1",
+    "should": "^13.2.1"
+  }
+}
