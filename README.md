@@ -11,7 +11,7 @@ other techniques to improve success rate on vm launch.
 
 ## Installation
 
-    npm i @google-cloud/compute -S
+  npm i @google-cloud/compute -S
 	npm i zones-for-google-cloud -S
 
 ## JS Engine Compatiblity
@@ -20,17 +20,17 @@ Includes ES6+ code. Intended for deployment on node.js
 
 ## Initialization
 
-	const compute = require('@google-cloud/compute')(); // requires credentials when run outside of Google Cloud 
+	const compute = require('@google-cloud/compute')(); // requires credentials when run outside of Google Cloud
 	const zonesForGoogleCloud = require('zones-for-google-cloud')(compute);
 
 ## Usage
 
 returns Promises
 
-`{...}` is a placeholder for additional code 
+`{...}` is a placeholder for additional code
 
-Resolves to an Array of Strings containing  names of some Google Compute Engine Zones that 
-are UP, start with us-, support Intel Skylake (required for 64 or 96 cpu VMs), in a region where 
+Resolves to an Array of Strings containing  names of some Google Compute Engine Zones that
+are UP, start with us-, support Intel Skylake (required for 64 or 96 cpu VMs), in a region where
 you have at least 64 CPUS quota
 
     zonesForGoogleCloud.find({
@@ -45,7 +45,7 @@ All parameters are optional, in which case you get a list of all zones that are 
 objects are ANDed.  This OR/AND was written so you can test CPUS and PREEMPTIBLE_CPUS quota at the same time with an array
 of two objects. The metric names are all caps and match the metric names in `gcloud compute region describe us-central1`
 
-	
+
 ## Tests
 
 The [tests](./working-tests.txt) were run on a Google Cloud VM with full access to Google Compute Engine.
@@ -71,5 +71,3 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 This software is 3rd party software. This software is not a product of Google, Inc.
 
 Google Compute Engine[tm] is a trademark of Google, Inc.
-
-
