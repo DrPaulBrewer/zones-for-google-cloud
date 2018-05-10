@@ -1,3 +1,6 @@
+// Copyright 2018 Paul Brewer Economic and Financial Technology Consulting LLC <drpaulbrewer@eaftc.com>
+// This software is open source software available under the terms of the MIT License.
+
 // jshint node:true, esversion:6 
 
 const arrayUniq = require('array-uniq');
