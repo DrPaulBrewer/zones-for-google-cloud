@@ -2,11 +2,11 @@
 
 Extract a list of zones in Google Compute Engine[tm] suitable for starting a particular VM.
 
-You can spefify the region of the world, CPU type, number of CPUs, disk, or other requirements
-and get a list of zones that are "UP" where you have quota meeting these requirements.
+You can specify the region of the world (`prefix`), CPU type (`platform`), number of CPUs, disk, or other `requirements`
+and get a list of zones that are "UP" where your project has quota meeting these requirements.
 
 Bear in mind that doesn't mean you won't get a ZONE_RESOURCES_EXHAUSTED or similar error, but since
-it returns a list of zones, you can then write your code to do random choice, or temporary blacklisting, or
+it returns a list of zones, you can then write your code to retry, do random choice, or temporary blacklisting, or
 other techniques to improve success rate on vm launch.
 
 ## Installation
