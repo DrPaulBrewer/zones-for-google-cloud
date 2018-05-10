@@ -21,7 +21,7 @@ Includes ES6+ code. Intended for deployment on node.js
 ## Initialization
 
 	const compute = require('@google-cloud/compute')(); // requires credentials when run outside of Google Cloud 
-	const zones = require('zones-for-google-cloud')(compute);
+	const zonesForGoogleCloud = require('zones-for-google-cloud')(compute);
 
 ## Usage
 
@@ -33,7 +33,7 @@ Resolves to an Array of Strings containing  names of some Google Compute Engine 
 are UP, start with us-, support Intel Skylake (required for 64 or 96 cpu VMs), in a region where 
 you have at least 64 CPUS quota
 
-    zones.find({
+    zonesForGoogleCloud.find({
 	   prefix: 'us-',
 	   platform: 'Intel Skylake',
 	   requirements: [ { CPUS: 64 } ]
