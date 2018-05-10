@@ -37,7 +37,7 @@ you have at least 64 CPUS quota
 	   prefix: 'us-',
 	   platform: 'Intel Skylake',
 	   requirements: [ { CPUS: 64 } ]
-   }).then(...startMyVMInOneOfTheseZones...)
+    }).then(...startMyVMInOneOfTheseZones...)
 
 All parameters are optional, in which case you get a list of all zones that are up.
 
