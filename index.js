@@ -32,31 +32,48 @@ module.exports = function (gce) {
     return z.replace(dashLetterEnd, '');
   }
 
-  function withQuota({ candidateZones, requirements }) {
-    function hasQuota(region, request) {
-      const qs = region.quotas;
-      return Object.keys(request).every((reqMetric) => {
-        const reqAmount = request[reqMetric];
-        return qs.some((quotaEntry) => {
-          return ((quotaEntry.metric === reqMetric) &&
-            (typeof (quotaEntry.limit) === 'number') &&
-            (typeof (quotaEntry.usage) === 'number') &&
-            ((quotaEntry.usage + reqAmount) <= quotaEntry.limit)
-          );
+  function allQuotas({prefix} = {}){
+    function addToReport(region){
+        const qs = region.quotas;
+        quotas[region.name] = {};
+        qs.forEach({metric,limit,usage}=>{
+          if (metric && limit && usage)
+            quotas[region.name][metric] = {limit, usage};
         });
+    }
+    const quotas = {};
+    if (prefix===undefined) prefix='';
+    return (
+      rain("Regions", { filter: (r)=>(r.name.startsWith(prefix))})
+      .then(regions=>regions.forEach(addToReport))
+      .then(()=>(quotas))
+    );
+  }
+
+  function withQuota({ candidateZones, requirements }) {
+    function allowed(qs, requirements){
+      function ok(resource,add){
+        if (!qs[resource]) return false;
+        return ((qs[resource].usage+add)<=(qs[resource].limit));
+      }
+      return Object.keys(requirements).every((r)=>{
+        const additional = requirements[r];
+        const pre = 'PREEMPTIBLE_';
+        if (r.startsWith(pre)){
+          // if a PREEMPTIBLE_X quota exists, it is binding
+          if (qs[r] && qs[r].limit) return ok(r, additional);
+          // if a PREEMPTIBLE_X quota is zero, ordinary X quota is binding
+          return ok(r.replace(pre,''), additional);
+        }
+        // if the resource does not have a PREEMPTIBLE_ prefix,
+        return ok(r, additional);
       });
     }
-
-    function allows(requests) {
-      return function (region) {
-        return requests.some(request => (hasQuota(region, request)));
-      };
-    }
-    if ((requirements === undefined) || (requirements.length === 0)) {
+    if ((requirements === {}) || (requirements === null)) {
       return candidateZones;
     }
     return (
-      rain("Regions", { filter: allows(requirements), pluck: 'name' })
+      allQuotas().then(allQs=>(Object.keys(allQs).filter(region=>(allowed(allQs[region],requirements)))))
       .then((allowedRegions) => (candidateZones.filter(z => (allowedRegions.includes(toRegion(z))))))
     );
   }
@@ -70,6 +87,6 @@ module.exports = function (gce) {
     );
   }
 
-  return { toRegion, find, withQuota };
+  return { toRegion, find, withQuota, allQuotas };
 
 };

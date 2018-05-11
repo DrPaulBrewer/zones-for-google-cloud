@@ -11,12 +11,17 @@ describe('zonesForGoogleCloud ', function(){
     it('should have properties .find,.withQuota,.toRegion ', function(){
 	zonesForGoogleCloud.should.have.properties('find','withQuota','toRegion');
     });
-    [2,8,64].forEach(n=>{
-	it(`should find zones for ${n} CPUS or ${n} PREEMPTIBLE_CPUS with Intel Skylake`, function(){
-	    const cpus = { CPUS: n};
-	    const precpus = { PREEMPTIBLE_CPUS: n };
+    [
+      {CPUS: 2},
+      {CPUS: 8},
+      {CPUS: 64},
+      {PREEMPTIBLE_CPUS:2},
+      {PREEMPTIBLE_CPUS:8},
+      {PREEMPTIBLE_CPUS:64}
+    ].forEach(req=>{
+	it(`should find zones for ${JSON.stringify(req)} with Intel Skylake`, function(){
 	    return (zonesForGoogleCloud
-		    .find({platform: 'Intel Skylake', requirements: [cpus,precpus]})
+		    .find({platform: 'Intel Skylake', requirements: req})
 		    .then(zones=>{
 			zones.length.should.be.above(1);
 			zones.forEach(z=>(z.should.be.type('string')));
@@ -49,4 +54,3 @@ describe('zonesForGoogleCloud ', function(){
 	       );
     });
 });
-
