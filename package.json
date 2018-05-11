@@ -1,6 +1,6 @@
 {
   "name": "zones-for-google-cloud",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "list zones in Google Cloud that are up, meet various requirements, and are in regions with available project quota",
   "main": "index.js",
   "scripts": {
