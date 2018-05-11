@@ -1,5 +1,5 @@
 
-> zones@0.1.0 test /home/drpaulbrewer/zones-for-google-cloud
+> zones-for-google-cloud@0.1.2 test /home/drpaulbrewer/zones-for-google-cloud
 > mocha --reporter spec --timeout 30000
 
 
@@ -7,13 +7,17 @@
   zonesForGoogleCloud 
     ✓ zonesForGoogleCloud(compute) should be an object
     ✓ should have properties .find,.withQuota,.toRegion 
-    ✓ should find zones for 2 CPUS or 2 PREEMPTIBLE_CPUS with Intel Skylake (1174ms)
-    ✓ should find zones for 8 CPUS or 8 PREEMPTIBLE_CPUS with Intel Skylake (348ms)
-    ✓ should find zones for 64 CPUS or 64 PREEMPTIBLE_CPUS with Intel Skylake (380ms)
-    ✓ should not find zones with platform Unobtanium (137ms)
-    ✓ should find zones in asia (82ms)
-    ✓ should not find zones on mars (yet) (79ms)
+    ✓ .allQuotas should resolve to at least 10 regions with at least 10 quota props each (672ms)
+    ✓ should find zones for {"CPUS":2} with Intel Skylake (479ms)
+    ✓ should find zones for {"CPUS":8} with Intel Skylake (335ms)
+    ✓ should find zones for {"CPUS":64} with Intel Skylake (357ms)
+    ✓ should find zones for {"PREEMPTIBLE_CPUS":2} with Intel Skylake (335ms)
+    ✓ should find zones for {"PREEMPTIBLE_CPUS":8} with Intel Skylake (407ms)
+    ✓ should find zones for {"PREEMPTIBLE_CPUS":64} with Intel Skylake (294ms)
+    ✓ should not find zones with platform Unobtanium (87ms)
+    ✓ should find zones in asia (71ms)
+    ✓ should not find zones on mars (yet) (71ms)
 
 
-  8 passing (2s)
+  12 passing (3s)
 
