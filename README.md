@@ -31,20 +31,18 @@ returns Promises
 
 Resolves to an Array of Strings containing  names of some Google Compute Engine Zones that
 are UP, start with us-, support Intel Skylake (required for 64 or 96 cpu VMs), in a region where
-you have at least 64 CPUS quota
+you have at least 64 PREEMPTIBLE_CPUS (or CPUS, if PREEMPTIBLE_CPUS quota is undefined) quota
 
     zonesForGoogleCloud.find({
 	   prefix: 'us-',
 	   platform: 'Intel Skylake',
-	   requirements: [ { CPUS: 64 } ]
+	   requirements: { PREEMPTIBLE_CPUS: 64 }
     }).then(...startMyVMInOneOfTheseZones...)
 
 All parameters are optional, in which case you get a list of all zones that are up.
 
-`requirements` is an array of objects, the requirements at the array level are ORd, and the metrics in the
-objects are ANDed.  This OR/AND was written so you can test CPUS and PREEMPTIBLE_CPUS quota at the same time with an array
-of two objects. The metric names are all caps and match the metric names in `gcloud compute region describe us-central1`
-
+`requirements` is an object, where the keys are Google Cloud Platform regional metrics and the values are the additional
+amounts needed. The METRICS ARE ALL CAPS and match the metric names in `gcloud compute region describe us-central1`
 
 ## Tests
 

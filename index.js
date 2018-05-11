@@ -33,15 +33,18 @@ module.exports = function (gce) {
   }
 
   function allQuotas({prefix} = {}){
+    const quotas = {};
     function addToReport(region){
         const qs = region.quotas;
         quotas[region.name] = {};
         qs.forEach(({metric,limit,usage})=>{
-          if (metric && limit && usage)
-            quotas[region.name][metric] = {limit, usage};
+          if (metric)
+            quotas[region.name][metric] = {
+              limit: +limit,
+              usage: +usage
+            };
         });
     }
-    const quotas = {};
     if (prefix===undefined) prefix='';
     return (
       rain("Regions", { filter: (r)=>(r.name.startsWith(prefix))})
