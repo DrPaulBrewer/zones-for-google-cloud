@@ -17,7 +17,7 @@ describe('zonesForGoogleCloud ', function(){
           .allQuotas()
           .then(quotas=>{
             Object.keys(quotas).length.should.be.above(10);
-            quotas.forEach(region=>(Object.keys(region).length.should.be.above(10)));
+            Object.keys(quotas).forEach(region=>(Object.keys(quotas[region]).length.should.be.above(10)));
           })
         );
     });
