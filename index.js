@@ -36,7 +36,7 @@ module.exports = function (gce) {
     function addToReport(region){
         const qs = region.quotas;
         quotas[region.name] = {};
-        qs.forEach({metric,limit,usage}=>{
+        qs.forEach(({metric,limit,usage})=>{
           if (metric && limit && usage)
             quotas[region.name][metric] = {limit, usage};
         });
