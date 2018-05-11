@@ -9,7 +9,7 @@ describe('zonesForGoogleCloud ', function(){
 	zonesForGoogleCloud.should.be.type("object");
     });
     it('should have properties .find,.withQuota,.toRegion ', function(){
-	zonesForGoogleCloud.should.have.properties('find','withQuota','toRegion');
+	zonesForGoogleCloud.should.have.properties('find','withQuota','toRegion','allQuotas');
     });
     [
       {CPUS: 2},

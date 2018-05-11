@@ -69,7 +69,7 @@ module.exports = function (gce) {
         return ok(r, additional);
       });
     }
-    if ((requirements === {}) || (requirements === null)) {
+    if ((requirements===undefined) || (requirements === {}) || (requirements === null)) {
       return candidateZones;
     }
     return (
