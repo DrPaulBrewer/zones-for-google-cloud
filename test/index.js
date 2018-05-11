@@ -11,6 +11,16 @@ describe('zonesForGoogleCloud ', function(){
     it('should have properties .find,.withQuota,.toRegion ', function(){
 	zonesForGoogleCloud.should.have.properties('find','withQuota','toRegion','allQuotas');
     });
+    it('.allQuotas should resolve to at least 10 regions with at least 10 quota props each', function(){
+      return (
+        zonesForGoogleCloud
+          .allQuotas()
+          .then(quotas=>{
+            Object.keys(quotas).length.should.be.above(10);
+            quotas.forEach(region=>(Object.keys(region).length.should.be.above(10)));
+          })
+        );
+    });
     [
       {CPUS: 2},
       {CPUS: 8},
