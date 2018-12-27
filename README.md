@@ -11,8 +11,8 @@ other techniques to improve success rate on vm launch.
 
 ## Installation
 
-  npm i @google-cloud/compute -S
-	npm i zones-for-google-cloud -S
+    npm i @google-cloud/compute -S
+    npm i zones-for-google-cloud -S
 
 ## JS Engine Compatiblity
 
